@@ -1,3 +1,5 @@
+import { CoinBadge } from "../components/CoinBadge";
+
 interface Props {
   onOpenStudio: () => void;
 }
@@ -12,15 +14,18 @@ export function Footer({ onOpenStudio }: Props) {
             Aethera<sup className="top-[-0.7em] text-[0.42em] tracking-normal">®</sup>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
-            A browser studio for building, playing and sharing your own platformers. Questions,
-            ideas, bugs — it's a playground, so go break things.
+            A browser studio for building, playing and sharing your own platformers — and minting
+            them as coins on Pump.fun.
           </p>
-          <button
-            onClick={onOpenStudio}
-            className="mt-6 rounded-full bg-black px-6 py-2.5 text-sm text-white transition-transform duration-200 hover:scale-[1.03]"
-          >
-            Begin Journey
-          </button>
+          <CoinBadge className="mt-6" />
+          <div>
+            <button
+              onClick={onOpenStudio}
+              className="mt-6 rounded-full bg-black px-6 py-2.5 text-sm text-white transition-transform duration-200 hover:scale-[1.03]"
+            >
+              Begin Journey
+            </button>
+          </div>
         </div>
 
         <div>

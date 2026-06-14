@@ -1,4 +1,4 @@
-import { Pencil, Play, Plus, Share2, Trash2 } from "lucide-react";
+import { Pencil, Play, Plus, Rocket, Share2, Trash2 } from "lucide-react";
 import { Reveal } from "../components/Reveal";
 import { LevelThumb } from "../components/LevelThumb";
 import { Tile, type Level } from "../engine/types";
@@ -17,11 +17,12 @@ interface Props {
   onPlay: (level: Level) => void;
   onEdit: (level: Level, id?: string | null) => void;
   onShare: (level: Level) => void;
+  onLaunch: (level: Level) => void;
   onCreate: () => void;
   onDelete: (id: string) => void;
 }
 
-export function Showcase({ examples, saved, onPlay, onEdit, onShare, onCreate, onDelete }: Props) {
+export function Showcase({ examples, saved, onPlay, onEdit, onShare, onLaunch, onCreate, onDelete }: Props) {
   return (
     <Section
       id="showcase"
@@ -38,6 +39,7 @@ export function Showcase({ examples, saved, onPlay, onEdit, onShare, onCreate, o
               onPlay={() => onPlay(lvl)}
               onEdit={() => onEdit(lvl)}
               onShare={() => onShare(lvl)}
+              onLaunch={() => onLaunch(lvl)}
             />
           </Reveal>
         ))}
@@ -71,6 +73,7 @@ export function Showcase({ examples, saved, onPlay, onEdit, onShare, onCreate, o
                   onPlay={() => onPlay(g.level)}
                   onEdit={() => onEdit(g.level, g.id)}
                   onShare={() => onShare(g.level)}
+                  onLaunch={() => onLaunch(g.level)}
                   onDelete={() => onDelete(g.id)}
                 />
               </Reveal>
@@ -88,6 +91,7 @@ function GameCard({
   onPlay,
   onEdit,
   onShare,
+  onLaunch,
   onDelete,
 }: {
   level: Level;
@@ -95,6 +99,7 @@ function GameCard({
   onPlay: () => void;
   onEdit: () => void;
   onShare: () => void;
+  onLaunch: () => void;
   onDelete?: () => void;
 }) {
   return (
@@ -119,6 +124,9 @@ function GameCard({
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-1">
+          <CardBtn label="Launch as token" onClick={onLaunch}>
+            <Rocket size={15} />
+          </CardBtn>
           <CardBtn label="Remix in studio" onClick={onEdit}>
             <Pencil size={15} />
           </CardBtn>

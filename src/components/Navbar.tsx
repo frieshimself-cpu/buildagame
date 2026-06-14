@@ -5,8 +5,8 @@ interface Props {
 const LINKS = [
   { label: "Home", href: "#top", active: true },
   { label: "Showcase", href: "#showcase" },
-  { label: "Features", href: "#features" },
   { label: "About", href: "#about" },
+  { label: "$GAME", href: "#token" },
   { label: "Reach Us", href: "#reach" },
 ];
 

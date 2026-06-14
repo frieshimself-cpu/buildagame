@@ -12,6 +12,8 @@
     "lint:types": "tsc --noEmit"
   },
   "dependencies": {
+    "@solana/web3.js": "^1.98.4",
+    "buffer": "^6.0.3",
     "lucide-react": "^0.469.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

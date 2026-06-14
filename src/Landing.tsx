@@ -1,6 +1,7 @@
 import { Hero } from "./components/Hero";
 import type { Level } from "./engine/types";
 import type { SavedGame } from "./storage";
+import { Coin } from "./sections/Coin";
 import { CTASection } from "./sections/CTASection";
 import { Features } from "./sections/Features";
 import { Footer } from "./sections/Footer";
@@ -16,6 +17,7 @@ interface Props {
   onPlay: (level: Level) => void;
   onEdit: (level: Level, id?: string | null) => void;
   onShare: (level: Level) => void;
+  onLaunch: (level: Level) => void;
   onDelete: (id: string) => void;
 }
 
@@ -32,9 +34,11 @@ export function Landing(props: Props) {
         onPlay={props.onPlay}
         onEdit={props.onEdit}
         onShare={props.onShare}
+        onLaunch={props.onLaunch}
         onCreate={props.onCreate}
         onDelete={props.onDelete}
       />
+      <Coin onOpenStudio={props.onOpenStudio} />
       <CTASection onOpenStudio={props.onOpenStudio} />
       <Footer onOpenStudio={props.onOpenStudio} />
     </div>

@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import App from "../App";
 import { EXAMPLE_LEVELS, starterLevel } from "../engine/level";
 import { GamePlayer } from "../game/GamePlayer";
+import { LaunchModal } from "../components/LaunchModal";
 import { Studio } from "../studio/Studio";
 
 /**
@@ -27,6 +28,7 @@ describe("smoke render", () => {
         initial: { id: null, level: starterLevel() },
         onExit: () => {},
         onTest: () => {},
+        onLaunch: () => {},
       }),
     );
     expect(html).toContain("Test");
@@ -39,5 +41,13 @@ describe("smoke render", () => {
     );
     expect(html).toContain("First Steps");
     expect(html).toContain("Exit");
+  });
+
+  it("renders the token launch modal", () => {
+    const html = renderToString(
+      createElement(LaunchModal, { level: EXAMPLE_LEVELS[1], onClose: () => {} }),
+    );
+    expect(html).toContain("Pump.fun");
+    expect(html).toContain("Turn your game into a coin");
   });
 });

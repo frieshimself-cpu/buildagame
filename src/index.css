@@ -36,6 +36,11 @@ body {
   .pill {
     @apply inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium transition;
   }
+
+  /* Inputs inside the dark launch modal. */
+  .modal-input {
+    @apply w-full rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-white/30;
+  }
 }
 
 @layer utilities {

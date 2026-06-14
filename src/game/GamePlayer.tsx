@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, Pencil, RotateCcw, Share2, Trophy } from "lucide-react";
+import { ArrowLeft, Pencil, Rocket, RotateCcw, Share2, Trophy } from "lucide-react";
 import { DT, MAX_FRAME } from "../engine/constants";
 import { buildGameState, respawn, step } from "../engine/physics";
 import type { GameState, Level } from "../engine/types";
@@ -19,9 +19,10 @@ interface Props {
   onExit: () => void;
   onEdit?: () => void;
   onShare?: () => void;
+  onLaunch?: () => void;
 }
 
-export function GamePlayer({ level, onExit, onEdit, onShare }: Props) {
+export function GamePlayer({ level, onExit, onEdit, onShare, onLaunch }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stateRef = useRef<GameState>(buildGameState(level));
@@ -209,6 +210,14 @@ export function GamePlayer({ level, onExit, onEdit, onShare }: Props) {
               >
                 Play again
               </button>
+              {onLaunch && (
+                <button
+                  onClick={onLaunch}
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#54e0ad] to-[#a99bff] px-6 py-3 text-sm font-medium text-ink-950 transition hover:scale-[1.02]"
+                >
+                  <Rocket size={16} /> Launch as a coin
+                </button>
+              )}
               <div className="flex gap-2.5">
                 {onShare && (
                   <button

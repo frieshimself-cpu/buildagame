@@ -3,7 +3,7 @@ import type { Level } from "./engine/types";
 
 /** A permanent, self-contained link that plays this exact level. */
 export function buildShareUrl(level: Level): string {
-  const base = `${location.origin}${location.pathname}`;
+  const base = typeof location !== "undefined" ? `${location.origin}${location.pathname}` : "";
   return `${base}#play=${encodeLevel(level)}`;
 }
 

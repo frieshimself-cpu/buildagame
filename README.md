@@ -27,6 +27,32 @@ landing page.
   Serif + Inter, a looping fade in/out video background, and scroll-reveal
   sections, including a showcase of playable built-in levels.
 
+## Launch a game as a coin ($GAME on Pump.fun)
+
+Aethera is the home of **$GAME** on Pump.fun — and every game you build can become
+its own token. From the studio (or a game's win screen) hit **Launch** to mint it
+on Solana:
+
+- The game's image and a **playable share link** are written into the token
+  metadata, so anyone who finds the coin can play the game.
+- It's **non-custodial** — you sign in your own wallet (Phantom/Solflare/Backpack).
+  Aethera never holds keys or funds. Token creation is built via
+  [PumpPortal](https://pumpportal.fun)'s local-transaction API; the site only asks
+  your wallet to sign.
+- Honest by design: the UI states plainly that this is a real mainnet token that
+  costs SOL, is permissionless, can't be undone, and carries no guarantee of value.
+
+**Deploy notes for the launch feature:**
+
+- The token image is uploaded to Pump.fun's IPFS endpoint through a tiny
+  serverless proxy at [`api/pump-ipfs.ts`](api/pump-ipfs.ts) to avoid browser CORS.
+  This runs automatically on **Vercel** (or `vercel dev`). On a purely static host
+  (e.g. GitHub Pages) that proxy doesn't exist, so launching needs the Vercel
+  deployment.
+- After you create the **$GAME** coin, paste its mint address into
+  [`src/coin.ts`](src/coin.ts) (`GAME.contractAddress`) and the nav, token band and
+  footer light up with the live address, a copy button and Buy / Solscan links.
+
 ## Controls
 
 | Action | Keys |

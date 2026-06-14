@@ -6,6 +6,17 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "./",
   plugins: [react()],
+  // @solana/web3.js (loaded only when launching a token) expects a Node-ish
+  // environment. Map `global` to `globalThis` and the `buffer` import to the
+  // browser shim; main.tsx installs the Buffer global before web3 is imported.
+  define: {
+    global: "globalThis",
+  },
+  resolve: {
+    alias: {
+      buffer: "buffer",
+    },
+  },
   test: {
     environment: "node",
     include: ["src/**/*.test.ts", "src/**/*.test.tsx"],

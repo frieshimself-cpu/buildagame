@@ -8,6 +8,7 @@ import {
   Play,
   Plus,
   Redo2,
+  Rocket,
   Save,
   Share2,
   Trash2,
@@ -26,9 +27,10 @@ interface Props {
   initial: Draft;
   onExit: () => void;
   onTest: (level: Level) => void;
+  onLaunch: (level: Level) => void;
 }
 
-export function Studio({ initial, onExit, onTest }: Props) {
+export function Studio({ initial, onExit, onTest, onLaunch }: Props) {
   const ed = useEditor(initial);
   const [scrollX, setScrollX] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
@@ -176,6 +178,13 @@ export function Studio({ initial, onExit, onTest }: Props) {
             className="flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-black transition hover:scale-[1.03]"
           >
             <Play size={16} /> Test
+          </button>
+          <button
+            onClick={() => onLaunch(ed.levelRef.current)}
+            title="Launch this game as a token on Pump.fun"
+            className="flex items-center gap-2 rounded-full bg-gradient-to-r from-[#54e0ad] to-[#a99bff] px-4 py-1.5 text-sm font-medium text-ink-950 transition hover:scale-[1.03]"
+          >
+            <Rocket size={16} /> Launch
           </button>
         </div>
       </header>

@@ -3,6 +3,7 @@ import { GamePlayer } from "./game/GamePlayer";
 import { EXAMPLE_LEVELS, decodeLevel, starterLevel } from "./engine/level";
 import type { Level } from "./engine/types";
 import { Landing } from "./Landing";
+import { LaunchModal } from "./components/LaunchModal";
 import { copyShareLink } from "./share";
 import { Studio } from "./studio/Studio";
 import { type Draft, type SavedGame, deleteGame, loadDraft, loadGames, saveDraft } from "./storage";
@@ -26,6 +27,7 @@ export default function App() {
   );
   const [studioKey, setStudioKey] = useState(0);
   const [play, setPlay] = useState<{ level: Level; from: View } | null>(null);
+  const [launch, setLaunch] = useState<Level | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const fromHash = useRef(false);
   const toastTimer = useRef<number>();
@@ -106,36 +108,29 @@ export default function App() {
     setView(back);
   }, [play]);
 
+  let body: JSX.Element;
   if (view === "studio") {
-    return (
-      <>
-        <Studio
-          key={studioKey}
-          initial={studioDraft}
-          onExit={() => setView("home")}
-          onTest={(level) => playLevel(level, "studio")}
-        />
-        <Toast msg={toast} />
-      </>
+    body = (
+      <Studio
+        key={studioKey}
+        initial={studioDraft}
+        onExit={() => setView("home")}
+        onTest={(level) => playLevel(level, "studio")}
+        onLaunch={(level) => setLaunch(level)}
+      />
     );
-  }
-
-  if (view === "play" && play) {
-    return (
-      <>
-        <GamePlayer
-          level={play.level}
-          onExit={exitPlay}
-          onEdit={() => remix(play.level, null)}
-          onShare={() => share(play.level)}
-        />
-        <Toast msg={toast} />
-      </>
+  } else if (view === "play" && play) {
+    body = (
+      <GamePlayer
+        level={play.level}
+        onExit={exitPlay}
+        onEdit={() => remix(play.level, null)}
+        onShare={() => share(play.level)}
+        onLaunch={() => setLaunch(play.level)}
+      />
     );
-  }
-
-  return (
-    <>
+  } else {
+    body = (
       <Landing
         examples={EXAMPLE_LEVELS}
         saved={saved}
@@ -144,8 +139,16 @@ export default function App() {
         onPlay={(level) => playLevel(level, "home")}
         onEdit={remix}
         onShare={share}
+        onLaunch={(level) => setLaunch(level)}
         onDelete={removeGame}
       />
+    );
+  }
+
+  return (
+    <>
+      {body}
+      {launch && <LaunchModal level={launch} onClose={() => setLaunch(null)} />}
       <Toast msg={toast} />
     </>
   );
