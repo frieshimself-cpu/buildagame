@@ -11,7 +11,7 @@ export const GAME = {
   /** Pump.fun token symbol (no leading $). */
   symbol: "GAME",
   /** The mint address. Leave empty until launch. */
-  contractAddress: "",
+  contractAddress: "FjA6RWucUsyC8iDkXTjAqs4RBPxCjRJQKj5SKoRspump",
 };
 
 export const hasGameCA = (): boolean => GAME.contractAddress.trim().length > 0;
