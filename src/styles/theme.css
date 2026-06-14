@@ -1,0 +1,132 @@
+/*
+ * Motion + decorative theme layer.
+ *
+ * The hero entrance animations are defined exactly as specified: a "fade rise"
+ * (opacity 0 → 1, translateY 20px → 0, 0.8s ease-out) with two staggered
+ * variants for the description and call-to-action.
+ */
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-rise {
+  animation: fade-rise 0.8s ease-out both;
+}
+.animate-fade-rise-delay {
+  animation: fade-rise 0.8s ease-out 0.2s both;
+}
+.animate-fade-rise-delay-2 {
+  animation: fade-rise 0.8s ease-out 0.4s both;
+}
+
+/* Scroll-reveal: the same fade-rise, triggered when an element enters view. */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.reveal.is-visible {
+  animation: fade-rise 0.8s ease-out both;
+}
+
+/*
+ * Cinematic fallback backdrop. The hero plays a remote video, but the page must
+ * still feel alive if that CDN is slow or blocked — these slow-drifting light
+ * blooms sit behind it.
+ */
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(80% 60% at 50% 8%, #f6f6f7 0%, #ffffff 60%);
+}
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.aurora::before {
+  background: radial-gradient(circle at center, rgba(120, 130, 255, 0.18), transparent 60%);
+  top: -16vmax;
+  left: -10vmax;
+  animation: drift-a 28s ease-in-out infinite alternate;
+}
+.aurora::after {
+  background: radial-gradient(circle at center, rgba(255, 170, 120, 0.16), transparent 60%);
+  bottom: -22vmax;
+  right: -10vmax;
+  animation: drift-b 34s ease-in-out infinite alternate;
+}
+@keyframes drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(16vmax, 10vmax, 0) scale(1.15);
+  }
+}
+@keyframes drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  to {
+    transform: translate3d(-14vmax, -10vmax, 0) scale(0.95);
+  }
+}
+
+/* Seamless logo / proof marquee (content rendered twice). */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 26s linear infinite;
+}
+
+/* Soft pulse used on the studio "recording" dot and live badges. */
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.animate-soft-pulse {
+  animation: soft-pulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-rise,
+  .animate-fade-rise-delay,
+  .animate-fade-rise-delay-2,
+  .reveal.is-visible {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .aurora::before,
+  .aurora::after,
+  .animate-marquee,
+  .animate-soft-pulse {
+    animation: none;
+  }
+}

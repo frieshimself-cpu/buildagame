@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+}
+
+@layer components {
+  /* Generous, balanced display type used across the marketing surface. */
+  .font-display {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+  }
+
+  /* Hairline button used in the studio toolbar + nav. */
+  .pill {
+    @apply inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium transition;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Thin, dark scrollbar for the studio's panels. */
+  .scrollbar-dark {
+    scrollbar-width: thin;
+    scrollbar-color: #343a52 transparent;
+  }
+  .scrollbar-dark::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .scrollbar-dark::-webkit-scrollbar-thumb {
+    background: #262b3d;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* The game + studio canvases should never be blurred by the browser when the
+ * device pixel ratio is scaled — we draw crisp vector art ourselves. */
+canvas {
+  display: block;
+}

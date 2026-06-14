@@ -1,0 +1,11 @@
+/*
+ * Typography for Aethera.
+ *   Display (headings, logo, hero): Instrument Serif
+ *   Body (navigation, descriptions, UI): Inter
+ *
+ * Imported here as required by the design spec. index.html also issues
+ * <link rel="preconnect"> hints so the font CSS connection is warm before this
+ * @import resolves.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
